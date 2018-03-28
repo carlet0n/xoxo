@@ -66,7 +66,20 @@ export const winner = (board) => {
   return "Draw!";
 }
 
+const bad = (state, action) => {
+  if (action.player !== state.turn) return "It's not your turn!";
+  if (!Array.isArray(action.coord)) return "That is an invalid input!";
+  if (action.coord[0] < 0 || action.coord[0] > 2) return "That's not on the grid!!";
+  if (action.coord[1] < 0 || action.cood[1] > 2) return "That's not on the grid!!";
+  if (state.board.hasIn(action.coord)) return "That spot is already taken!";
+  return null;
+}
+
 export default function reducer(state = {}, action) {
+  //const error = bad(state, action)
+  //console.log(Object.assign({}, state, error))
+  //if (error) return Object.assign({}, state, {error})
+
   const newBoard = boardReducer(state.board, action);
   const isWinner = winner(newBoard)
   return {
