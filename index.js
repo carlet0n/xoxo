@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 
-import gameReducer, {move} from './game'
+import gameReducer, {move, winner, streak} from './game'
 import {createStore} from 'redux'
 
 
@@ -35,8 +35,14 @@ const game = createStore(gameReducer)
 game.subscribe(printBoard)
 game.subscribe(getInput('X'))
 game.subscribe(getInput('O'))
-game.subscribe(() => console.log(game.getState()))
-//game.subscribe(console.log(game.getState()))
+game.subscribe(() => {
+  const theWinner = game.getState().winner
+  if (theWinner) {
+    console.log("The winner is :", theWinner);
+    process.exit(0);
+  }
+});
+
 
 // We dispatch a dummy START action to call all our
 // subscribers the first time.
