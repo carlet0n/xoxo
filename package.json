@@ -15,6 +15,7 @@
     "babel-register": "^6.26.0",
     "immutable": "^3.8.2",
     "inquirer": "^5.1.0",
+    "npm": "^5.8.0",
     "redux": "^3.7.2"
   }
 }

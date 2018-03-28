@@ -3,6 +3,8 @@ import inquirer from 'inquirer'
 import gameReducer, {move} from './game'
 import {createStore} from 'redux'
 
+
+
 const printBoard = () => {
   const {board} = game.getState()
   for (let r = 0; r != 3; ++r) {
@@ -25,15 +27,16 @@ const getInput = player => async () => {
   game.dispatch(move(turn, [row, col]))
 }
 
+
 // Create the store
 const game = createStore(gameReducer)
 
 // Debug: Print the state
-// game.subscribe(() => console.log(game.getState()))
-
 game.subscribe(printBoard)
 game.subscribe(getInput('X'))
 game.subscribe(getInput('O'))
+game.subscribe(() => console.log(game.getState()))
+//game.subscribe(console.log(game.getState()))
 
 // We dispatch a dummy START action to call all our
 // subscribers the first time.
